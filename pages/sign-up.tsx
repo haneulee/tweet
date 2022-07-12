@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { CreateForm } from "types";
 
 const CreateAccount: NextPage = () => {
     const router = useRouter();
@@ -11,10 +12,10 @@ const CreateAccount: NextPage = () => {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm();
+    } = useForm<CreateForm>();
     const [create, { loading, data }] = useMutation("/api/users/create");
 
-    const onValid = (validForm) => {
+    const onValid = (validForm: CreateForm) => {
         if (loading) return;
         create(validForm);
         reset();

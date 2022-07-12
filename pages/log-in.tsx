@@ -3,6 +3,7 @@ import useUser from "lib/client/useUser";
 import { NextPage } from "next";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { EnterForm } from "types";
 
 const Enter: NextPage = () => {
     const { mutateUser } = useUser();
@@ -11,10 +12,10 @@ const Enter: NextPage = () => {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm();
+    } = useForm<EnterForm>();
     const [enter, { loading, data }] = useMutation("/api/users/enter");
 
-    const onValid = (validForm) => {
+    const onValid = (validForm: EnterForm) => {
         if (loading) return;
         enter(validForm);
         reset();
