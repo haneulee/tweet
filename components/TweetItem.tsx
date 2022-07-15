@@ -1,25 +1,24 @@
-import Image from "next/image";
 import Link from "next/link";
 
 interface ItemProps {
     id: number;
+    title: string;
     text: string;
     favs: number;
 }
 
-export default function TweetItem({ text, favs, id }: ItemProps) {
+export default function TweetItem({ title, text, favs, id }: ItemProps) {
     return (
-        <Link href={`/products/${id}`}>
-            <a className="flex cursor-pointer justify-between px-4 pt-5">
+        <Link href={`/tweet/${id}`}>
+            <a className="flex cursor-pointer justify-between px-4 p-5 border rounded-md border-white">
                 <div className="flex space-x-4">
                     <div className="flex flex-col pt-2">
-                        <h3 className="text-sm font-medium text-gray-900">
-                            {text}
-                        </h3>
+                        <h3 className="text-md font-medium ">{title}</h3>
+                        <p>{text}</p>
                     </div>
                 </div>
                 <div className="flex items-end justify-end space-x-2">
-                    <div className="flex items-center space-x-0.5 text-sm  text-gray-600">
+                    <div className="flex items-center space-x-0.5 text-md text-white">
                         <svg
                             className="h-4 w-4"
                             fill="none"

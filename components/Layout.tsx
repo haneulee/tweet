@@ -22,7 +22,7 @@ export default function Layout({
     };
     return (
         <div>
-            <div className="fixed top-0 flex h-12 w-full max-w-xl items-center justify-around  border-b bg-white px-10 text-lg  font-medium text-gray-800">
+            <div className="fixed top-0 flex h-24 w-full max-w-xl items-center justify-around  border-b  px-10 text-2xl  font-medium ">
                 {canGoBack ? (
                     <button onClick={onClick} className="absolute left-4">
                         <svg
@@ -47,18 +47,18 @@ export default function Layout({
                     </span>
                 ) : null}
             </div>
-            <div className={cls("pt-12", hasTabBar ? "pb-24" : "")}>
+            <div className={cls("pt-40", hasTabBar ? "pb-24" : "")}>
                 {children}
             </div>
             {hasTabBar ? (
-                <nav className="fixed bottom-0 flex w-full max-w-xl justify-around border-t bg-white px-10 pb-5 pt-3 text-xs text-gray-700">
+                <nav className="fixed bottom-0 flex w-full max-w-xl justify-around border-t px-10 pb-5 pt-3 text-md ">
                     <Link href="/">
                         <a
                             className={cls(
                                 "flex flex-col items-center space-y-2 ",
                                 router.pathname === "/"
-                                    ? "text-orange-500"
-                                    : "transition-colors hover:text-gray-500"
+                                    ? "text-blue-400"
+                                    : "transition-colors hover:text-black"
                             )}
                         >
                             <svg
@@ -83,8 +83,8 @@ export default function Layout({
                             className={cls(
                                 "flex flex-col items-center space-y-2 ",
                                 router.pathname === "/profile"
-                                    ? "text-orange-500"
-                                    : "transition-colors hover:text-gray-500"
+                                    ? "text-blue-400"
+                                    : "transition-colors hover:text-black"
                             )}
                         >
                             <svg

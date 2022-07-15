@@ -1,43 +1,27 @@
 import Layout from "components/Layout";
-import useMutation from "lib/client/useMutation";
-import useUser from "lib/client/useUser";
-import Router, { useRouter } from "next/router";
 import Head from "next/head";
-import { useEffect } from "react";
+
 import useSWR from "swr";
 import FloatingButton from "components/FloatingButton";
 import TweetItem from "components/TweetItem";
 import { TweetsResponse } from "types";
 
 export default () => {
-    // const { user } = useUser();
-    const router = useRouter();
-    const [logout, { loading, data: logoutData }] =
-        useMutation("/api/users/logout");
     const { data } = useSWR<TweetsResponse>("/api/tweet");
 
-    // if (!user) return <div>Loading...</div>;
-    // const onLogout = () => {
-    //     if (loading) return;
-    //     logout({
-    //         user,
-    //     });
-    // };
-    // useEffect(() => {
-    //     if (data && data.ok) {
-    //         router.push("/log-in");
-    //     }
-    // }, [data]);
+    console.log(data);
+
     return (
-        <Layout title="홈" hasTabBar>
+        <Layout title="Tweet" hasTabBar>
             <Head>
-                <title>Home</title>
+                <title>Tweet</title>
             </Head>
-            <div className="flex flex-col space-y-5 divide-y">
+            <div className="flex flex-col space-y-5 divide-y border-b-orange-100">
                 {data?.tweets?.map((tweet) => (
                     <TweetItem
                         id={tweet.id}
                         key={tweet.id}
+                        title={tweet.title}
                         text={tweet.text}
                         favs={tweet._count.fav}
                     />
@@ -60,7 +44,6 @@ export default () => {
                     </svg>
                 </FloatingButton>
             </div>
-            {/* <Image src={Sample} placeholder="blur" quality={10} /> */}
         </Layout>
     );
 };

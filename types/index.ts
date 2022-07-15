@@ -11,6 +11,11 @@ export interface CreateForm {
     password: string;
 }
 
+export interface TweetForm {
+    title: string;
+    text: string;
+}
+
 export interface MutationResult {
     ok: boolean;
 }
@@ -23,4 +28,8 @@ interface TweetWithCount extends Tweet {
 
 export interface TweetsResponse extends MutationResult {
     tweets: TweetWithCount[];
+}
+
+export interface CreateTweetMutation extends MutationResult {
+    tweet: Tweet;
 }
