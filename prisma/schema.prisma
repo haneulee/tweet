@@ -12,24 +12,15 @@ datasource db {
 
 model User {
   id              Int         @id @default(autoincrement())
-  phone           String?     @unique
   email           String?     @unique
   name            String
+  password        String      @default("")
   avatar          String?
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
-  tokens          Token[]
   tweets          Tweet[]
   answers         Answer[]
   fav             Fav[]
-}
-model Token {
-  id        Int      @id @default(autoincrement())
-  payload   String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Tweet {

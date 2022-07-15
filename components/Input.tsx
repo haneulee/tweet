@@ -20,7 +20,7 @@ export default function Input({
     return (
         <div>
             <label
-                className="mb-1 block text-sm font-medium text-gray-700"
+                className="mb-1 block text-sm font-medium text-white"
                 htmlFor={name}
             >
                 {label}
@@ -32,7 +32,7 @@ export default function Input({
                         required={required}
                         {...register}
                         type={type}
-                        className="w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500"
+                        className="text-black w-full appearance-none rounded-md px-3 py-2 border-2 border-transparent placeholder-black shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                     />
                 </div>
             ) : null}

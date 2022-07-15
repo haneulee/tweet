@@ -1,3 +1,5 @@
+import Button from "components/Button";
+import Input from "components/Input";
 import useMutation from "lib/client/useMutation";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -30,32 +32,44 @@ const CreateAccount: NextPage = () => {
         }
     }, [data, router]);
     return (
-        <>
-            <h2>Create Account</h2>
-            <form onSubmit={handleSubmit(onValid)}>
-                <div>
-                    <label htmlFor="email">Email : </label>
-                    <input
-                        {...register("email", {
+        <div className="mt-16 px-4">
+            <h3 className="text-center text-3xl font-bold">Create Account</h3>
+            <div className="mt-12">
+                <form
+                    onSubmit={handleSubmit(onValid)}
+                    className="mt-8 flex flex-col space-y-4"
+                >
+                    <Input
+                        register={register("email", {
                             required: "Please write down your email.",
                         })}
+                        name="email"
+                        label="Email address"
                         type="email"
+                        required
                     />
-                    {errors.email?.message}
-                </div>
-                <div>
-                    <label htmlFor="name">Name : </label>
-                    <input
-                        {...register("name", {
+                    <Input
+                        register={register("name", {
                             required: "Please write down your name.",
                         })}
-                        type="name"
+                        name="name"
+                        label="name"
+                        type="text"
+                        required
                     />
-                    {errors.name?.message}
-                </div>
-                <input type="submit" value="Create Account"></input>
-            </form>
-        </>
+                    <Input
+                        register={register("password", {
+                            required: "Please write down your password.",
+                        })}
+                        name="password"
+                        label="Password"
+                        type="password"
+                        required
+                    />
+                    <Button text={"Create Account"} />
+                </form>
+            </div>
+        </div>
     );
 };
 

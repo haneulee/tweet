@@ -7,9 +7,10 @@ async function handler(
     res: NextApiResponse<ResponseType>
 ) {
     const {
-        body: { email, name },
+        body: { email, name, password },
     } = req;
-    if (!email || !name) return res.status(400).json({ ok: false });
+    if (!email || !name || !password)
+        return res.status(400).json({ ok: false });
 
     const alreadyExists = Boolean(
         await client.user.findUnique({
@@ -32,6 +33,7 @@ async function handler(
         data: {
             email,
             name,
+            password,
         },
     });
 
