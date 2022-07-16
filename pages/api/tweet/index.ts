@@ -10,9 +10,18 @@ async function handler(
     if (req.method === "GET") {
         const tweets = await client.tweet.findMany({
             include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        avatar: true,
+                        email: true,
+                    },
+                },
                 _count: {
                     select: {
                         fav: true,
+                        answers: true,
                     },
                 },
             },

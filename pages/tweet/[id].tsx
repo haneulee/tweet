@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Link from "next/link";
+import Tweet from "public/tweet.svg";
 import Layout from "components/Layout";
 import useSWR from "swr";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import { cls } from "lib/client/utils";
 import useMutation from "lib/client/useMutation";
 import { useEffect } from "react";
 import moment from "moment";
+import Image from "next/image";
 
 const TweetDetail: NextPage = () => {
     const router = useRouter();
@@ -47,71 +48,26 @@ const TweetDetail: NextPage = () => {
     return (
         <Layout title="View Tweet" canGoBack>
             <div>
-                <div className="mb-3 flex cursor-pointer items-center justify-between space-x-3  border-b px-4 pb-3">
-                    <div className="flex">
-                        <div className="h-10 w-10 rounded-full bg-slate-300 mr-5" />
-                        <div>
-                            <p className="text-sm font-medium ">
+                <div className="flex">
+                    <div className="flex items-start space-x-3 px-4 flex-col">
+                        <div className="flex items-center">
+                            <div className="h-8 w-8 justify-center flex mr-3">
+                                <Image src={Tweet} width={"100%"} />
+                            </div>
+                            <p className="text-md font-medium ">
                                 {data?.tweet.user.name}
                             </p>
-                            <Link
-                                href={`/users/profile/${data?.tweet?.user?.id}`}
-                            >
-                                <a className="text-xs font-medium ">
-                                    View profile &rarr;
-                                </a>
-                            </Link>
                         </div>
                     </div>
-                    <button
-                        onClick={onFavClick}
-                        className={cls(
-                            "flex items-center justify-center rounded-md p-3",
-                            data?.isLike
-                                ? "text-red-500  hover:text-red-600"
-                                : "text-white  hover:text-black"
-                        )}
-                    >
-                        {data?.isLike ? (
-                            <svg
-                                className="h-6 w-6"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                                    clipRule="evenodd"
-                                ></path>
-                            </svg>
-                        ) : (
-                            <svg
-                                className="h-6 w-6 "
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                />
-                            </svg>
-                        )}
-                    </button>
-                </div>
-                <div>
-                    <div className="mt-2 px-4 ">
-                        <p className="font-medium text-xl text-blue-500 ">
+                    <div className="px-4 ">
+                        <p className="font-medium text-2xl text-blue-500 pb-3">
                             {data?.tweet?.title}
                         </p>
                         <p>{data?.tweet?.text}</p>
                     </div>
-                    <div className="mt-3 flex w-full space-x-5 border-t border-b-[2px] px-4 py-2.5  ">
+                </div>
+                <div>
+                    <div className="mt-3 flex w-full space-x-5 border-t border-b-[2px] px-4 py-2.5 justify-between ">
                         <span className="flex items-center space-x-2 text-sm">
                             <svg
                                 className="h-4 w-4"
@@ -129,6 +85,46 @@ const TweetDetail: NextPage = () => {
                             </svg>
                             <span>답변 {data?.tweet._count.answers}</span>
                         </span>
+                        <button
+                            onClick={onFavClick}
+                            className={cls(
+                                "flex items-center justify-center rounded-md ",
+                                data?.isLike
+                                    ? "text-red-500  hover:text-red-600"
+                                    : "text-white  hover:text-black"
+                            )}
+                        >
+                            {data?.isLike ? (
+                                <svg
+                                    className="h-6 w-6"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                                        clipRule="evenodd"
+                                    ></path>
+                                </svg>
+                            ) : (
+                                <svg
+                                    className="h-6 w-6 "
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                    />
+                                </svg>
+                            )}
+                        </button>
                     </div>
                 </div>
                 <div className="my-5 space-y-5 px-4">
@@ -137,7 +133,9 @@ const TweetDetail: NextPage = () => {
                             key={answer.id}
                             className="flex items-start space-x-3"
                         >
-                            <div className="h-8 w-8 rounded-full bg-slate-200" />
+                            <div className="h-8 w-8 justify-center flex">
+                                <Image src={Tweet} width={"100%"} />
+                            </div>
                             <div>
                                 <span className="block text-sm font-medium ">
                                     {answer.user.name}

@@ -16,7 +16,7 @@ export default () => {
             <Head>
                 <title>Tweet</title>
             </Head>
-            <div className="flex flex-col space-y-5 divide-y border-b-orange-100">
+            <div className="flex flex-col space-y-5 divide-y border-b-blue-100">
                 {data?.tweets?.map((tweet) => (
                     <TweetItem
                         id={tweet.id}
@@ -24,6 +24,9 @@ export default () => {
                         title={tweet.title}
                         text={tweet.text}
                         favs={tweet._count.fav}
+                        answers={tweet._count.answers}
+                        userName={tweet.user.name}
+                        userEmail={tweet.user.email || ""}
                     />
                 ))}
                 <FloatingButton href="/tweet/upload">

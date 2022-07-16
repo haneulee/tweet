@@ -1,4 +1,4 @@
-import { Answer, Tweet, User } from "@prisma/client";
+import { Answer, Fav, Tweet, User } from "@prisma/client";
 
 export interface EnterForm {
     email: string;
@@ -21,8 +21,10 @@ export interface MutationResult {
 }
 
 interface TweetWithCount extends Tweet {
+    user: User;
     _count: {
         fav: number;
+        answers: number;
     };
 }
 
@@ -41,7 +43,7 @@ interface AnswerWithUser extends Answer {
 interface TweetWithUser extends Tweet {
     user: User;
     _count: {
-        favs: number;
+        fav: number;
         answers: number;
     };
     answers: AnswerWithUser[];
@@ -59,4 +61,30 @@ export interface AnswerForm {
 export interface AnswerResponse {
     ok: boolean;
     response: Answer;
+}
+
+export interface EditProfileResponse extends MutationResult {
+    error?: string;
+}
+
+export interface TweetWithOnlyCount extends Tweet {
+    user: User;
+    _count: {
+        fav: number;
+        answers: number;
+    };
+}
+
+export interface FavWithTweet extends Fav {
+    tweet: TweetWithOnlyCount;
+}
+
+export interface AllUser extends User {
+    tweets: TweetWithOnlyCount[];
+    answers: Answer[];
+    fav: FavWithTweet[];
+}
+
+export interface UserResponse extends MutationResult {
+    profile: AllUser;
 }

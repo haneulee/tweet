@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useSWR from "swr";
+import { UserResponse } from "types";
 
 export default function useUser() {
-    const { data, error, mutate } = useSWR("api/users/me");
+    const { data, error, mutate } = useSWR<UserResponse>("api/users/me");
     const router = useRouter();
 
     useEffect(() => {

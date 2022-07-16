@@ -1,39 +1,56 @@
+import Image from "next/image";
 import Link from "next/link";
+import Like from "public/like.svg";
+import Answer from "public/answer.svg";
+import Tweet from "public/tweet.svg";
 
 interface ItemProps {
     id: number;
     title: string;
     text: string;
     favs: number;
+    answers: number;
+    userName: string;
+    userEmail: string;
 }
 
-export default function TweetItem({ title, text, favs, id }: ItemProps) {
+export default function TweetItem({
+    title,
+    text,
+    favs,
+    answers,
+    id,
+    userName,
+    userEmail,
+}: ItemProps) {
     return (
         <Link href={`/tweet/${id}`}>
-            <a className="flex cursor-pointer justify-between px-4 p-5 border rounded-md border-white">
+            <a className="flex-col cursor-pointer justify-between px-4 p-5 border rounded-md border-white">
                 <div className="flex space-x-4">
-                    <div className="flex flex-col pt-2">
-                        <h3 className="text-md font-medium ">{title}</h3>
-                        <p>{text}</p>
+                    <div className="flex flex-col items-start">
+                        <div className="h-8 w-8 justify-center flex mb-2">
+                            <Image src={Tweet} width={"100%"} />
+                        </div>
+                        <h3 className="text-sm font-medium ">{userName}</h3>
+                        <p className="text-xs">{userEmail}</p>
                     </div>
-                </div>
-                <div className="flex items-end justify-end space-x-2">
-                    <div className="flex items-center space-x-0.5 text-md text-white">
-                        <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            ></path>
-                        </svg>
-                        <span>{favs}</span>
+                    <div className="flex flex-col h-full ">
+                        <h3 className="text-2xl font-medium pb-1">{title}</h3>
+                        <p>{text}</p>
+                        <div className="flex ">
+                            <div className="flex items-center text-md text-white">
+                                <div className="flex h-10 w-10 items-center justify-center ">
+                                    <Image src={Answer} width={"100%"} />
+                                </div>
+                                <span>{answers}</span>
+                            </div>
+                            <div className="flex items-center text-md text-white">
+                                <div className="flex h-10 w-10 items-center justify-center ">
+                                    <Image src={Like} width={"100%"} />
+                                </div>
+                                <span>{favs}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </a>
